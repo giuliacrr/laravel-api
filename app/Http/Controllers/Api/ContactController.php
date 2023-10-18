@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Contact;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 class ContactController extends Controller
@@ -23,8 +24,9 @@ class ContactController extends Controller
         $newContact->email = $data['email'];
         $newContact->message = $data['message'];
         //Il file in allegato no è required quindi faremo un if
-        if(key_exists("attachment", $data)){
-            $path = Storage::put("contacts", $data['attachment']);
+        if(key_exists("attachment", $data) && !is_null($data["attachment"])){
+            //Log::debug(var_export($data["attachment"], true));
+            $path = Storage::put("contacts", $data["attachment"]);
             $newContact->attachment = $path;
         }
         $newContact->save();

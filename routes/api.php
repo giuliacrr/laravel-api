@@ -24,4 +24,4 @@ Route::get('projects', [ProjectController::class, 'index']);
 Route::get('projects/{slug}', [ProjectController::class, 'show']);
 
 //Creo la route per contacts 
-Route::post('contacts', [ContactController::class, 'store']);
+Route::post("contacts", [ContactController::class, "store"]);
